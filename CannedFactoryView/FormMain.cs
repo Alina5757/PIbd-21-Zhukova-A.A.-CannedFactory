@@ -38,7 +38,6 @@ namespace CannedFactoryView
                     dataGridView1.Columns[1].Visible = false;
                     dataGridView1.Columns[2].Visible = false;
                     dataGridView1.Columns[3].Visible = false;
-                   /*dataGridView1.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;*/
                 }
             }
             catch (Exception ex) {
