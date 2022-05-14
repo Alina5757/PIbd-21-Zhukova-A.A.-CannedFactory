@@ -22,6 +22,8 @@ namespace CannedFactoryFileImplement
 
         private readonly string ClientFileName = "Client.xml";
 
+        private readonly string ImplementerFileName = "Implementer.xml";
+
         public List<Component> Components { get; set; }
 
         public List<Order> Orders { get; set; }
@@ -30,11 +32,14 @@ namespace CannedFactoryFileImplement
 
         public List<Client> Clients { get; set; }
 
+        public List<Implementer> Implementers { get; set; }
+
         private FileDataListSingleton() {
             Components = LoadComponents();
             Orders = LoadOrders();
             Canneds = LoadCanneds();
             Clients = LoadClients();
+            Implementers = LoadImplementers();
         }
 
         public static FileDataListSingleton GetInstance() {
@@ -50,8 +55,9 @@ namespace CannedFactoryFileImplement
             SaveOrders();
             SaveCanneds();
             SaveClients();
+            SaveImplementers();
         }
-        
+
         private List<Component> LoadComponents() {
             var list = new List<Component>();
 
@@ -83,7 +89,7 @@ namespace CannedFactoryFileImplement
                         ClientId = Convert.ToInt32(elem.Element("ClientId").Value),
                         Count = Convert.ToInt32(elem.Element("Count").Value),
                         Sum = Convert.ToInt32(elem.Element("Sum").Value),
-                        status = (OrderStatus)Enum.Parse(typeof(OrderStatus), (elem.Element("Status").Value)),
+                        Status = (OrderStatus)Enum.Parse(typeof(OrderStatus), (elem.Element("Status").Value)),
                         DateCreate = DateTime.Parse(elem.Element("DateCreate").Value),
                         DateImplement = elem.Element("DateImplement").Value == null ? DateTime.MinValue : DateTime.Parse(elem.Element("DateImplement").Value)
                     });
@@ -137,6 +143,25 @@ namespace CannedFactoryFileImplement
             return list;
         }
 
+        private List<Implementer> LoadImplementers()
+        {
+            var list = new List<Implementer>();
+            if (File.Exists(ImplementerFileName))
+            {
+                var xDocument = XDocument.Load(ImplementerFileName);
+                var xElements = xDocument.Root.Elements("Implementer").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Implementer
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        FIO = elem.Element("FIO").Value
+                    });
+                }
+            }
+            return list;
+        }
+
         private void SaveComponents() {
             if (Components != null) {
                 var xElement = new XElement("Components");
@@ -166,7 +191,7 @@ namespace CannedFactoryFileImplement
                         new XElement("CannedId", order.CannedId),
                         new XElement("Count", order.Count),
                         new XElement("Sum", order.Sum),
-                        new XElement("Status", order.status),
+                        new XElement("Status", order.Status),
                         new XElement("DateCreate", order.DateCreate),
                         new XElement("DateImplement", dateIm)));
                 }
@@ -216,6 +241,24 @@ namespace CannedFactoryFileImplement
 
                 var xDocument = new XDocument(xElement);
                 xDocument.Save(ClientFileName);
+            }
+        }
+
+        private void SaveImplementers()
+        {
+            if (Implementers != null)
+            {
+                var xElement = new XElement("Implementers");
+
+                foreach (var implementer in Implementers)
+                {
+                    xElement.Add(new XElement("Implementer"),
+                        new XAttribute("Id", implementer.Id),
+                        new XElement("FIO", implementer.FIO));
+                }
+
+                var xDocument = new XDocument(xElement);
+                xDocument.Save(ImplementerFileName);
             }
         }
     }

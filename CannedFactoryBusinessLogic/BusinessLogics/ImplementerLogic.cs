@@ -10,53 +10,53 @@ using System.Threading.Tasks;
 
 namespace CannedFactoryBusinessLogic.BusinessLogics
 {
-    public class ClientLogic : IClientLogic
+    public class ImplementerLogic : IImplementerLogic
     {
-        private readonly IClientStorage  _clientStorage;
+        private readonly IImplementerStorage _implementerStorage;
 
-        public ClientLogic(IClientStorage clientStorage)
+        public ImplementerLogic(IImplementerStorage implementerStorage)
         {
-            _clientStorage = clientStorage;
+            _implementerStorage = implementerStorage;
         }
 
-        public List<ClientViewModel> Read(ClientBindingModel model)
+        public List<ImplementerViewModel> Read(ImplementerBindingModel model)
         {
             if (model == null)
             {
-                return _clientStorage.GetFullList();
+                return _implementerStorage.GetFullList();
             }
 
             if (model.Id.HasValue)
             {
-                return new List<ClientViewModel> { _clientStorage.GetElement(model) };
+                return new List<ImplementerViewModel> { _implementerStorage.GetElement(model) };
             }
 
-            return _clientStorage.GetFilteredList(model);
+            return _implementerStorage.GetFilteredList(model);
         }
 
-        public void CreateOrUpdate(ClientBindingModel model)
+        public void CreateOrUpdate(ImplementerBindingModel model)
         {
-            var element = _clientStorage.GetElement(new ClientBindingModel
+            var element = _implementerStorage.GetElement(new ImplementerBindingModel
             {
-                Login = model.Login
+                FIO = model.FIO
             });
             if (element != null && element.Id != model.Id)
             {
                 throw new Exception("Уже есть клиент с таким логином");
             }
-            if (model.Id != 0)
+            if (model.Id != null && model.Id != 0)
             {
-                _clientStorage.Update(model);
+                _implementerStorage.Update(model);
             }
             else
             {
-                _clientStorage.Insert(model);
+                _implementerStorage.Insert(model);
             }
         }
 
-        public void Delete(ClientBindingModel model)
+        public void Delete(ImplementerBindingModel model)
         {
-            var element = _clientStorage.GetElement(new ClientBindingModel
+            var element = _implementerStorage.GetElement(new ImplementerBindingModel
             {
                 Id = model.Id
             });
@@ -66,7 +66,7 @@ namespace CannedFactoryBusinessLogic.BusinessLogics
                 throw new Exception("Элемент не найден");
             }
 
-            _clientStorage.Delete(model);
+            _implementerStorage.Delete(model);
         }
     }
 }

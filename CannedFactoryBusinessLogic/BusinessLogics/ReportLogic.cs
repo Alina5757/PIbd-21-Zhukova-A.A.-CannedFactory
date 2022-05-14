@@ -79,7 +79,7 @@ namespace CannedFactoryBusinessLogic.BusinessLogics
             {
                 DateCreate = x.DateCreate,
                 CannedName = x.CannedName,
-                FIO = x.FIO,
+                FIO = x.FIOClient,
                 Count = x.Count,
                 Sum = x.Sum,
                 Status = x.Status

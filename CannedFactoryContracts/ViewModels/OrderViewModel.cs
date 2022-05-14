@@ -11,12 +11,16 @@ namespace CannedFactoryContracts.ViewModels
         public int Id { get; set; }
         public int CannedId { get; set; }
         public int ClientId { get; set; }
+        public int ImplementerId { get; set; }
 
         [DisplayName("Изделие")]
         public string CannedName { get; set; }
 
         [DisplayName("ФИО клиента")]
-        public string FIO { get; set; }
+        public string FIOClient { get; set; }
+
+        [DisplayName("ФИО исполнителя")]
+        public string FIOImplementer { get; set; }
 
         [DisplayName("Количество")]
         public int Count { get; set; }
