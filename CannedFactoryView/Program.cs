@@ -7,6 +7,8 @@ using Unity;
 using Unity.Lifetime;
 using System.Windows.Forms;
 using CannedFactoryFileImplement;
+using CannedFactoryBusinessLogic.OfficePackage;
+using CannedFactoryBusinessLogic.OfficePackage.Implements;
 
 namespace CannedFactoryView
 {
@@ -38,6 +40,11 @@ namespace CannedFactoryView
             currentContainer.RegisterType<IComponentLogic, ComponentLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IOrderLogic, OrderLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ICannedLogic, CannedLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IReportLogic, ReportLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<AbstractSaveToExcel, SaveToExcel>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<AbstractSaveToPdf, SaveToPdf>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<AbstractSaveToWord, SaveToWord>(new HierarchicalLifetimeManager());
+
 
             return currentContainer;
         }

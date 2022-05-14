@@ -16,5 +16,7 @@ namespace CannedFactoryDatabaseImplement.Models
 
         [ForeignKey("ComponentId")]
         public virtual List<CannedComponent> CannedComponents { get; set; }
+
+
     }
 }
