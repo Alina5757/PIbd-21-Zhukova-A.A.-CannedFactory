@@ -145,5 +145,14 @@ namespace CannedFactoryClientApp.Controllers
             CannedViewModel cann = APIClient.GetRequest<CannedViewModel>($"api/main/getcanned?cannedId={canned}");
             return count * cann.Price;
         }
+
+        public IActionResult Mails() {
+            if (Program.Client == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
+            var model = APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/getmessages?clientId={Program.Client.Id}");
+            return View(model);
+        }
     }
 }
