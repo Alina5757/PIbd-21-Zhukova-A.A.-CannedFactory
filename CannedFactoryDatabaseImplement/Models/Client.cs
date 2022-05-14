@@ -23,5 +23,8 @@ namespace CannedFactoryDatabaseImplement.Models
 
         [ForeignKey("ClientId")]
         public virtual List<Order> Orders { get; set; }
+
+        [ForeignKey("ClientId")]
+        public virtual List<MessageInfo> MessagesInfo { get; set; }
     }
 }

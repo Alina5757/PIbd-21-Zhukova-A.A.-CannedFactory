@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="DocumentFormat.OpenXml" Version="2.16.0" />
+    <PackageReference Include="MailKit" Version="3.0.0" />
     <PackageReference Include="PdfSharp.MigraDoc.Standard" Version="1.51.15" />
   </ItemGroup>
 
