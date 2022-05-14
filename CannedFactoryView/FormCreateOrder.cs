@@ -11,11 +11,13 @@ namespace CannedFactoryView
     {
         private readonly ICannedLogic _logicC;
         private readonly IOrderLogic _logicO;
-        public FormCreateOrder(ICannedLogic logicC, IOrderLogic logicO)
+        private readonly IClientLogic _logicClient;
+        public FormCreateOrder(ICannedLogic logicC, IOrderLogic logicO, IClientLogic logicClient)
         {
             InitializeComponent();
             _logicC = logicC;
             _logicO = logicO;
+            _logicClient = logicClient;
 
             List<CannedViewModel> list = _logicC.Read(null);
             if (list != null)
@@ -24,6 +26,15 @@ namespace CannedFactoryView
                 comboBoxCanned.ValueMember = "Id";
                 comboBoxCanned.DataSource = list;
                 comboBoxCanned.SelectedItem = null;
+            }
+
+            List<ClientViewModel> listClient = _logicClient.Read(null);
+            if (list != null)
+            {
+                comboBoxClient.DisplayMember = "FIO";
+                comboBoxClient.ValueMember = "Id";
+                comboBoxClient.DataSource = listClient;
+                comboBoxClient.SelectedItem = null;
             }
         }              
 
@@ -64,11 +75,17 @@ namespace CannedFactoryView
                 MessageBox.Show("Выберите изделие", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            if (comboBoxClient.SelectedValue == null)
+            {
+                MessageBox.Show("Выберите клиента", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             try
             {
                 _logicO.CreateOrder(new CreateOrderBindingModel
                 {
                     CannedId = Convert.ToInt32(comboBoxCanned.SelectedValue),
+                    ClientId = Convert.ToInt32(comboBoxClient.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),
                     Sum = Convert.ToDecimal(textBoxSumm.Text)
                 });

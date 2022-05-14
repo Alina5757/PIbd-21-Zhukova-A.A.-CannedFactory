@@ -37,12 +37,14 @@ namespace CannedFactoryView
             this.textBoxSumm = new System.Windows.Forms.TextBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCansel = new System.Windows.Forms.Button();
+            this.comboBoxClient = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 26);
+            this.label1.Location = new System.Drawing.Point(26, 64);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 15);
             this.label1.TabIndex = 0;
@@ -51,7 +53,7 @@ namespace CannedFactoryView
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 53);
+            this.label2.Location = new System.Drawing.Point(16, 91);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(75, 15);
             this.label2.TabIndex = 1;
@@ -60,7 +62,7 @@ namespace CannedFactoryView
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(42, 81);
+            this.label3.Location = new System.Drawing.Point(41, 119);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 15);
             this.label3.TabIndex = 2;
@@ -70,7 +72,7 @@ namespace CannedFactoryView
             // 
             this.comboBoxCanned.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCanned.FormattingEnabled = true;
-            this.comboBoxCanned.Location = new System.Drawing.Point(97, 23);
+            this.comboBoxCanned.Location = new System.Drawing.Point(96, 61);
             this.comboBoxCanned.Name = "comboBoxCanned";
             this.comboBoxCanned.Size = new System.Drawing.Size(239, 23);
             this.comboBoxCanned.TabIndex = 3;
@@ -78,7 +80,7 @@ namespace CannedFactoryView
             // 
             // textBoxCount
             // 
-            this.textBoxCount.Location = new System.Drawing.Point(97, 50);
+            this.textBoxCount.Location = new System.Drawing.Point(96, 88);
             this.textBoxCount.Name = "textBoxCount";
             this.textBoxCount.Size = new System.Drawing.Size(171, 23);
             this.textBoxCount.TabIndex = 4;
@@ -86,14 +88,14 @@ namespace CannedFactoryView
             // 
             // textBoxSumm
             // 
-            this.textBoxSumm.Location = new System.Drawing.Point(97, 78);
+            this.textBoxSumm.Location = new System.Drawing.Point(96, 116);
             this.textBoxSumm.Name = "textBoxSumm";
             this.textBoxSumm.Size = new System.Drawing.Size(171, 23);
             this.textBoxSumm.TabIndex = 5;
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(170, 117);
+            this.buttonSave.Location = new System.Drawing.Point(169, 155);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 6;
@@ -103,7 +105,7 @@ namespace CannedFactoryView
             // 
             // buttonCansel
             // 
-            this.buttonCansel.Location = new System.Drawing.Point(261, 117);
+            this.buttonCansel.Location = new System.Drawing.Point(260, 155);
             this.buttonCansel.Name = "buttonCansel";
             this.buttonCansel.Size = new System.Drawing.Size(75, 23);
             this.buttonCansel.TabIndex = 7;
@@ -111,11 +113,32 @@ namespace CannedFactoryView
             this.buttonCansel.UseVisualStyleBackColor = true;
             this.buttonCansel.Click += new System.EventHandler(this.buttonCansel_Click);
             // 
+            // comboBoxClient
+            // 
+            this.comboBoxClient.BackColor = System.Drawing.SystemColors.Window;
+            this.comboBoxClient.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxClient.FormattingEnabled = true;
+            this.comboBoxClient.Location = new System.Drawing.Point(96, 17);
+            this.comboBoxClient.Name = "comboBoxClient";
+            this.comboBoxClient.Size = new System.Drawing.Size(239, 23);
+            this.comboBoxClient.TabIndex = 8;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(41, 21);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 15);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Клиент:";
+            // 
             // FormCreateOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(356, 154);
+            this.ClientSize = new System.Drawing.Size(356, 194);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.comboBoxClient);
             this.Controls.Add(this.buttonCansel);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.textBoxSumm);
@@ -141,5 +164,7 @@ namespace CannedFactoryView
         private System.Windows.Forms.TextBox textBoxSumm;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonCansel;
+        private System.Windows.Forms.ComboBox comboBoxClient;
+        private System.Windows.Forms.Label label4;
     }
 }

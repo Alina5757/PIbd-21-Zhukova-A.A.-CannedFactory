@@ -31,7 +31,8 @@ namespace CannedFactoryView
                     dataGridView1.DataSource = list;
                     dataGridView1.Columns[0].Visible = false;
                     dataGridView1.Columns[1].Visible = false;
-                    dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView1.Columns[2].Visible = false;
+                    dataGridView1.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
             catch (Exception ex) {
@@ -131,6 +132,12 @@ namespace CannedFactoryView
         {
             var form = Program.Container.Resolve<FormReportOrders>();
             form.Show();
+        }
+
+        private void ToolStripMenuItemClients_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormClient>();
+            form.ShowDialog();
         }
     }
 }
