@@ -23,15 +23,7 @@ namespace CannedFactoryView
         private void LoadData() {
             try
             {
-                var list = _logic.Read(null);
-                if (list != null)
-                {
-                    dataGridView1.DataSource = list;
-                    dataGridView1.Columns[0].Visible = false;
-                    dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    dataGridView1.Columns[2].Width = 75;
-                    dataGridView1.Columns[3].Visible = false;
-                }
+                Program.ConfigGrid(_logic.Read(null), dataGridView1);
             }
             catch (Exception ex)
             {

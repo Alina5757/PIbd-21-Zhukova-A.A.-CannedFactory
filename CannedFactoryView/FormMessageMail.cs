@@ -46,21 +46,11 @@ namespace CannedFactoryView
                 if (comboBox1.SelectedItem != null)
                 {
                     MessageInfoBindingModel model = new MessageInfoBindingModel { FromMailAddress = ((ClientViewModel)comboBox1.SelectedItem).Login };
-                    var list = _messageLogic.Read(model);
-                    if (list != null)
-                    {
-                        dataGridView1.DataSource = list;
-                        dataGridView1.Columns[0].Visible = false;
-                    }
+                    Program.ConfigGrid(_messageLogic.Read(model), dataGridView1);
                 }
                 else
                 {
-                    var list = _messageLogic.Read(null);
-                    if (list != null)
-                    {
-                        dataGridView1.DataSource = list;
-                        dataGridView1.Columns[0].Visible = false;
-                    }
+                    Program.ConfigGrid(_messageLogic.Read(null), dataGridView1);
                 }
             }
             catch (Exception ex)

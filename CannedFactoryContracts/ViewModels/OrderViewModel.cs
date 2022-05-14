@@ -1,6 +1,8 @@
-﻿using System;
+﻿using CannedFactoryContracts.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace CannedFactoryContracts.ViewModels
@@ -8,33 +10,35 @@ namespace CannedFactoryContracts.ViewModels
     //Заказ
     public class OrderViewModel
     {
+        [Column(title: "Номер", width: 75)]
         public int Id { get; set; }
         public int CannedId { get; set; }
         public int ClientId { get; set; }
         public int ImplementerId { get; set; }
 
-        [DisplayName("Изделие")]
+        [Column(title: "Изделие", width: 125)]
         public string CannedName { get; set; }
 
-        [DisplayName("ФИО клиента")]
+        [Column(title: "Клиент", width: 150)]
         public string FIOClient { get; set; }
 
-        [DisplayName("ФИО исполнителя")]
+        [Column(title: "Исполнитель", width: 150)]
+        [DataMember]
         public string FIOImplementer { get; set; }
 
-        [DisplayName("Количество")]
+        [Column(title: "Количество", width: 100)]
         public int Count { get; set; }
 
-        [DisplayName("Сумма")]
+        [Column(title: "Сумма", width: 50)]
         public decimal Sum { get; set; }
 
-        [DisplayName("Статус")]
+        [Column(title: "Статус", width: 75)]
         public string Status { get; set; }
 
-        [DisplayName("Дата создания")]
+        [Column(title: "Дата создания", width: 100)]
         public DateTime DateCreate { get; set; }
 
-        [DisplayName("Дата выполнения")]
+        [Column(title: "Дата выполнения", width: 100)]
         public DateTime? DateImplement { get; set; }
     }
 }
