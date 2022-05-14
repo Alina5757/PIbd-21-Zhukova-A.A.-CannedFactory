@@ -43,6 +43,7 @@ namespace CannedFactoryView
             this.ComponentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ComponentCannedsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemClients = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -123,7 +124,8 @@ namespace CannedFactoryView
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItemComponents,
-            this.ToolStripMenuItemCanneds});
+            this.ToolStripMenuItemCanneds,
+            this.ToolStripMenuItemClients});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(94, 20);
             this.toolStripMenuItem1.Text = "Справочники";
@@ -155,7 +157,7 @@ namespace CannedFactoryView
             // ComponentsToolStripMenuItem
             // 
             this.ComponentsToolStripMenuItem.Name = "ComponentsToolStripMenuItem";
-            this.ComponentsToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
+            this.ComponentsToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.ComponentsToolStripMenuItem.Text = "Список консервов";
             this.ComponentsToolStripMenuItem.Click += new System.EventHandler(this.ComponentsToolStripMenuItem_Click);
             // 
@@ -169,9 +171,16 @@ namespace CannedFactoryView
             // OrdersToolStripMenuItem
             // 
             this.OrdersToolStripMenuItem.Name = "OrdersToolStripMenuItem";
-            this.OrdersToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
+            this.OrdersToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.OrdersToolStripMenuItem.Text = "Список заказов";
             this.OrdersToolStripMenuItem.Click += new System.EventHandler(this.OrdersToolStripMenuItem_Click);
+            // 
+            // ToolStripMenuItemClients
+            // 
+            this.ToolStripMenuItemClients.Name = "ToolStripMenuItemClients";
+            this.ToolStripMenuItemClients.Size = new System.Drawing.Size(192, 22);
+            this.ToolStripMenuItemClients.Text = "Список клиентов";
+            this.ToolStripMenuItemClients.Click += new System.EventHandler(this.ToolStripMenuItemClients_Click);
             // 
             // FormMain
             // 
@@ -213,5 +222,6 @@ namespace CannedFactoryView
         private System.Windows.Forms.ToolStripMenuItem ComponentsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ComponentCannedsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem OrdersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemClients;
     }
 }

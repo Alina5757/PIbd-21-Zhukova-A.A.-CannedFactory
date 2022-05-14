@@ -63,6 +63,30 @@ namespace CannedFactoryDatabaseImplement.Migrations
                     b.ToTable("CannedComponents");
                 });
 
+            modelBuilder.Entity("CannedFactoryDatabaseImplement.Models.Client", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FIO")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Login")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Clients");
+                });
+
             modelBuilder.Entity("CannedFactoryDatabaseImplement.Models.Component", b =>
                 {
                     b.Property<int>("Id")
@@ -93,6 +117,13 @@ namespace CannedFactoryDatabaseImplement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClientName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
@@ -111,6 +142,8 @@ namespace CannedFactoryDatabaseImplement.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CannedId");
+
+                    b.HasIndex("ClientId");
 
                     b.ToTable("Orders");
                 });
@@ -142,13 +175,26 @@ namespace CannedFactoryDatabaseImplement.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("CannedFactoryDatabaseImplement.Models.Client", "Client")
+                        .WithMany("Orders")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Canned");
+
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("CannedFactoryDatabaseImplement.Models.Canned", b =>
                 {
                     b.Navigation("CannedComponents");
 
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("CannedFactoryDatabaseImplement.Models.Client", b =>
+                {
                     b.Navigation("Orders");
                 });
 

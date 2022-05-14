@@ -16,7 +16,7 @@ namespace CannedFactoryDatabaseImplement.Implements
         public List<CannedViewModel> GetFullList()
         {
             using var context = new CannedFactoryDatabase();
-            return context.Canneds
+             return context.Canneds
             .Include(rec => rec.CannedComponents)
             .ThenInclude(rec => rec.Component)
             .ToList()
@@ -134,9 +134,12 @@ namespace CannedFactoryDatabaseImplement.Implements
                 var cannedComponents = context.CannedComponents.Where(rec =>
                rec.CannedId == model.Id.Value).ToList();
                 // удалили те, которых нет в модели
-                context.CannedComponents.RemoveRange(cannedComponents.Where(rec =>
-               !model.CannedComponents.ContainsKey(rec.ComponentId)).ToList());
+                var kont = cannedComponents.Where(rec =>
+               !model.CannedComponents.ContainsKey(rec.ComponentId)).ToList();
+                context.CannedComponents.RemoveRange(kont);
                 context.SaveChanges();
+                cannedComponents = context.CannedComponents.Where(rec =>
+               rec.CannedId == model.Id.Value).ToList();
                 // обновили количество у существующих записей
                 foreach (var updateComponent in cannedComponents)
                 {

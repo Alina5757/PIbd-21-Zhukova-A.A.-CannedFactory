@@ -20,16 +20,21 @@ namespace CannedFactoryFileImplement
 
         private readonly string CannedFileName = "Canned.xml";
 
+        private readonly string ClientFileName = "Client.xml";
+
         public List<Component> Components { get; set; }
 
         public List<Order> Orders { get; set; }
 
         public List<Canned> Canneds { get; set; }
 
+        public List<Client> Clients { get; set; }
+
         private FileDataListSingleton() {
             Components = LoadComponents();
             Orders = LoadOrders();
             Canneds = LoadCanneds();
+            Clients = LoadClients();
         }
 
         public static FileDataListSingleton GetInstance() {
@@ -44,6 +49,7 @@ namespace CannedFactoryFileImplement
             SaveComponents();
             SaveOrders();
             SaveCanneds();
+            SaveClients();
         }
         
         private List<Component> LoadComponents() {
@@ -74,6 +80,7 @@ namespace CannedFactoryFileImplement
                     {
                         Id = Convert.ToInt32(elem.Attribute("Id").Value),
                         CannedId = Convert.ToInt32(elem.Element("CannedId").Value),
+                        ClientId = Convert.ToInt32(elem.Element("ClientId").Value),
                         Count = Convert.ToInt32(elem.Element("Count").Value),
                         Sum = Convert.ToInt32(elem.Element("Sum").Value),
                         status = (OrderStatus)Enum.Parse(typeof(OrderStatus), (elem.Element("Status").Value)),
@@ -103,6 +110,27 @@ namespace CannedFactoryFileImplement
                         CannedName = elem.Element("CannedName").Value,
                         Price = Convert.ToDecimal(elem.Element("Price").Value),
                         CannedComponents = cannComp
+                    });
+                }
+            }
+            return list;
+        }
+
+        private List<Client> LoadClients()
+        {
+            var list = new List<Client>();
+            if (File.Exists(ClientFileName))
+            {
+                var xDocument = XDocument.Load(ClientFileName);
+                var xElements = xDocument.Root.Elements("Client").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Client
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        FIO = elem.Element("FIO").Value,
+                        Login = elem.Element("Login").Value,
+                        Password = elem.Element("Password").Value
                     });
                 }
             }
@@ -169,6 +197,26 @@ namespace CannedFactoryFileImplement
                 var xDocument = new XDocument(xElement);
                 xDocument.Save(CannedFileName);
             }
-        }        
+        }
+
+        private void SaveClients()
+        {
+            if (Clients != null)
+            {
+                var xElement = new XElement("Clients");
+
+                foreach (var client in Clients)
+                {
+                    xElement.Add(new XElement("Client"),
+                        new XAttribute("Id", client.Id),
+                        new XElement("FIO", client.FIO),
+                        new XElement("Login", client.Login),
+                        new XElement("Password", client.Password));
+                }
+
+                var xDocument = new XDocument(xElement);
+                xDocument.Save(ClientFileName);
+            }
+        }
     }
 }

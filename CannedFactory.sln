@@ -13,7 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CannedFactoryView", "Canned
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CannedFactoryFileImplement", "CannedFactoryFileImplement\CannedFactoryFileImplement.csproj", "{7F57E869-6B45-4438-AEDE-1E8853743127}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CannedFactoryDatabaseImplement", "CannedFactoryDatabaseImplement\CannedFactoryDatabaseImplement.csproj", "{5D32EC94-A338-4346-B20C-9A105650AB7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CannedFactoryDatabaseImplement", "CannedFactoryDatabaseImplement\CannedFactoryDatabaseImplement.csproj", "{5D32EC94-A338-4346-B20C-9A105650AB7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CannedFactoryRestApi", "CannedFactoryRestApi\CannedFactoryRestApi.csproj", "{DD3B13AE-D9ED-46DD-9759-6AC37CF311D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CannedFactoryClientApp", "CannedFactoryClientApp\CannedFactoryClientApp.csproj", "{20BB7975-042C-4A3C-AEB3-CDB59704A912}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,14 @@ Global
 		{5D32EC94-A338-4346-B20C-9A105650AB7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D32EC94-A338-4346-B20C-9A105650AB7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D32EC94-A338-4346-B20C-9A105650AB7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD3B13AE-D9ED-46DD-9759-6AC37CF311D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD3B13AE-D9ED-46DD-9759-6AC37CF311D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD3B13AE-D9ED-46DD-9759-6AC37CF311D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD3B13AE-D9ED-46DD-9759-6AC37CF311D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20BB7975-042C-4A3C-AEB3-CDB59704A912}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20BB7975-042C-4A3C-AEB3-CDB59704A912}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20BB7975-042C-4A3C-AEB3-CDB59704A912}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20BB7975-042C-4A3C-AEB3-CDB59704A912}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
