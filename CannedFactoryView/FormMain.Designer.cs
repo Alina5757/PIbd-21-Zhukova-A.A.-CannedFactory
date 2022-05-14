@@ -39,12 +39,13 @@ namespace CannedFactoryView
             this.ToolStripMenuItemCanneds = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemClients = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemImplementer = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemMessage = new System.Windows.Forms.ToolStripMenuItem();
             this.отчетыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ComponentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ComponentCannedsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemWork = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItemMessage = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemCreateBackUp = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -95,7 +96,8 @@ namespace CannedFactoryView
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
             this.отчетыToolStripMenuItem,
-            this.ToolStripMenuItemWork});
+            this.ToolStripMenuItemWork,
+            this.ToolStripMenuItemCreateBackUp});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1045, 24);
@@ -142,6 +144,13 @@ namespace CannedFactoryView
             this.ToolStripMenuItemImplementer.Text = "Список исполнителей";
             this.ToolStripMenuItemImplementer.Click += new System.EventHandler(this.ToolStripMenuItemImplementer_Click);
             // 
+            // ToolStripMenuItemMessage
+            // 
+            this.ToolStripMenuItemMessage.Name = "ToolStripMenuItemMessage";
+            this.ToolStripMenuItemMessage.Size = new System.Drawing.Size(197, 22);
+            this.ToolStripMenuItemMessage.Text = "Список писем";
+            this.ToolStripMenuItemMessage.Click += new System.EventHandler(this.ToolStripMenuItemMessage_Click);
+            // 
             // отчетыToolStripMenuItem
             // 
             this.отчетыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -180,12 +189,12 @@ namespace CannedFactoryView
             this.ToolStripMenuItemWork.Text = "Запуск работ";
             this.ToolStripMenuItemWork.Click += new System.EventHandler(this.ToolStripMenuItemWork_Click);
             // 
-            // ToolStripMenuItemMessage
+            // ToolStripMenuItemCreateBackUp
             // 
-            this.ToolStripMenuItemMessage.Name = "ToolStripMenuItemMessage";
-            this.ToolStripMenuItemMessage.Size = new System.Drawing.Size(197, 22);
-            this.ToolStripMenuItemMessage.Text = "Список писем";
-            this.ToolStripMenuItemMessage.Click += new System.EventHandler(this.ToolStripMenuItemMessage_Click);
+            this.ToolStripMenuItemCreateBackUp.Name = "ToolStripMenuItemCreateBackUp";
+            this.ToolStripMenuItemCreateBackUp.Size = new System.Drawing.Size(97, 20);
+            this.ToolStripMenuItemCreateBackUp.Text = "Создать бэкап";
+            this.ToolStripMenuItemCreateBackUp.Click += new System.EventHandler(this.ToolStripMenuItemCreateBackUp_Click);
             // 
             // FormMain
             // 
@@ -227,5 +236,6 @@ namespace CannedFactoryView
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemImplementer;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemWork;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemMessage;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemCreateBackUp;
     }
 }

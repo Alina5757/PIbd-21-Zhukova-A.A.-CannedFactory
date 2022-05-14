@@ -13,17 +13,21 @@ namespace CannedFactoryView
         private readonly IReportLogic _reportLogic;
         private readonly IImplementerLogic _implementerLogic;
         private readonly IWorkProcess _workLogic;
+        private readonly IBackUpLogic _backUpLogic;
 
-        public FormMain(IOrderLogic orderLogic, IReportLogic reportLogic, IImplementerLogic implementerLogic, IWorkProcess workLogic) 
+        public FormMain(IOrderLogic orderLogic, IReportLogic reportLogic, IImplementerLogic implementerLogic, 
+            IWorkProcess workLogic, IBackUpLogic backUpLogic)
         {
             InitializeComponent();
             _orderLogic = orderLogic;
             _reportLogic = reportLogic;
             _implementerLogic = implementerLogic;
             _workLogic = workLogic;
+            _backUpLogic = backUpLogic;
         }
 
-        private void FormMain_Load(object sender, EventArgs e) {
+        private void FormMain_Load(object sender, EventArgs e)
+        {
             LoadData();
         }
 
@@ -31,17 +35,10 @@ namespace CannedFactoryView
         {
             try
             {
-                var list = _orderLogic.Read(null);
-                if (list != null)
-                {
-                    dataGridView1.DataSource = list;
-                    dataGridView1.Columns[0].Visible = false;
-                    dataGridView1.Columns[1].Visible = false;
-                    dataGridView1.Columns[2].Visible = false;
-                    dataGridView1.Columns[3].Visible = false;
-                }
+                Program.ConfigGrid(_orderLogic.Read(null), dataGridView1);
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -67,14 +64,16 @@ namespace CannedFactoryView
 
         private void buttonTakeOrderInWork_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count == 1) {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
                 int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
                 try
                 {
                     _orderLogic.TakeOrderInWork(new ChangeStatusBindingModel { OrderId = id });
                     LoadData();
                 }
-                catch (Exception ex) {
+                catch (Exception ex)
+                {
                     MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -82,14 +81,16 @@ namespace CannedFactoryView
 
         private void buttonOrderReady_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count == 1) {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
                 int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
                 try
                 {
                     _orderLogic.FinishOrder(new ChangeStatusBindingModel { OrderId = id });
                     LoadData();
                 }
-                catch (Exception ex) {
+                catch (Exception ex)
+                {
                     MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -97,14 +98,16 @@ namespace CannedFactoryView
 
         private void buttonIssuedOrder_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count == 1) {
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
                 int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
                 try
                 {
                     _orderLogic.DeliveryOrder(new ChangeStatusBindingModel { OrderId = id });
                     LoadData();
                 }
-                catch (Exception ex) {
+                catch (Exception ex)
+                {
                     MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -161,6 +164,26 @@ namespace CannedFactoryView
         {
             var form = Program.Container.Resolve<FormMessageMail>();
             form.ShowDialog();
+        }
+
+        private void ToolStripMenuItemCreateBackUp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_backUpLogic != null)
+                {
+                    var fbd = new FolderBrowserDialog();
+                    if (fbd.ShowDialog() == DialogResult.OK)
+                    {
+                        _backUpLogic.CreateBackUp(new BackUpSaveBinidingModel { FolderName = fbd.SelectedPath });
+                        MessageBox.Show("Бекап создан", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
