@@ -31,6 +31,9 @@
     <Compile Update="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FormMessageMail.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="FormReportCannedComponents.cs">
       <SubType>Form</SubType>
     </Compile>

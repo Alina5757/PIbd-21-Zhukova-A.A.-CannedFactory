@@ -1,4 +1,6 @@
 using CannedFactoryBusinessLogic.BusinessLogics;
+using CannedFactoryBusinessLogic.MailWorker;
+using CannedFactoryContracts.BindingModels;
 using CannedFactoryContracts.BusinessLogicsContracts;
 using CannedFactoryContracts.StoragesContracts;
 using CannedFactoryDatabaseImplement.Implements;
@@ -33,10 +35,14 @@ namespace CannedFactoryRestApi
             services.AddTransient<IClientStorage, ClientStorage>();
             services.AddTransient<IOrderStorage, OrderStorage>();
             services.AddTransient<ICannedStorage, CannedStorage>();
+            services.AddTransient<IMessageInfoStorage, MessageInfoStorage>();
             
             services.AddTransient<IOrderLogic, OrderLogic>();
             services.AddTransient<IClientLogic, ClientLogic>();
             services.AddTransient<ICannedLogic, CannedLogic>();
+            services.AddTransient<IMessageInfoLogic, MessageInfoLogic>();
+
+            services.AddSingleton<AbstractMailWorker, MailKitWorker>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -65,6 +71,18 @@ namespace CannedFactoryRestApi
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
             app.UseCors(builder => builder.AllowAnyOrigin());
+
+            var mailSender = app.ApplicationServices.GetService<AbstractMailWorker>();
+
+            mailSender.MailConfig(new MailConfigBindingModel
+            {
+                MailLogin = Configuration?.GetSection("MailLogin")?.Value.ToString(),
+                MailPassword = Configuration?.GetSection("MailPassword")?.Value.ToString(),
+                SmtpClientHost = Configuration?.GetSection("SmtpClientHost")?.Value.ToString(),
+                SmtpClientPort = Convert.ToInt32(Configuration?.GetSection("SmtpClientPort")?.Value.ToString()),
+                PopHost = Configuration?.GetSection("PopHost")?.Value.ToString(),
+                PopPort = Convert.ToInt32(Configuration?.GetSection("PopPort")?.Value.ToString())
+            });
         }
     }
 }

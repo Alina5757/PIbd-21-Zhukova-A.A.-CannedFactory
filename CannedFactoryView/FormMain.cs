@@ -1,6 +1,7 @@
 ﻿using CannedFactoryContracts.BindingModels;
 using CannedFactoryContracts.BusinessLogicsContracts;
 using System;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Unity;
 
@@ -154,6 +155,12 @@ namespace CannedFactoryView
         private void ToolStripMenuItemWork_Click(object sender, EventArgs e)
         {
             _workLogic.DoWork(_implementerLogic, _orderLogic);
+        }
+
+        private void ToolStripMenuItemMessage_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormMessageMail>();
+            form.ShowDialog();
         }
     }
 }

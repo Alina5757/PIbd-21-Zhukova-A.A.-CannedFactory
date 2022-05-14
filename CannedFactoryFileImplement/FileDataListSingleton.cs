@@ -2,10 +2,8 @@
 using CannedFactoryFileImplement.Models;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Xml.Linq;
 
 namespace CannedFactoryFileImplement
@@ -24,6 +22,8 @@ namespace CannedFactoryFileImplement
 
         private readonly string ImplementerFileName = "Implementer.xml";
 
+        private readonly string MessageInfoFileName = "MessageInfo.xml";
+
         public List<Component> Components { get; set; }
 
         public List<Order> Orders { get; set; }
@@ -34,12 +34,15 @@ namespace CannedFactoryFileImplement
 
         public List<Implementer> Implementers { get; set; }
 
+        public List<MessageInfo> MessagesInfo { get; set; }
+
         private FileDataListSingleton() {
             Components = LoadComponents();
             Orders = LoadOrders();
             Canneds = LoadCanneds();
             Clients = LoadClients();
             Implementers = LoadImplementers();
+            MessagesInfo = LoadMessagesInfo();
         }
 
         public static FileDataListSingleton GetInstance() {
@@ -56,6 +59,7 @@ namespace CannedFactoryFileImplement
             SaveCanneds();
             SaveClients();
             SaveImplementers();
+            SaveMessagesInfo();
         }
 
         private List<Component> LoadComponents() {
@@ -162,6 +166,29 @@ namespace CannedFactoryFileImplement
             return list;
         }
 
+        private List<MessageInfo> LoadMessagesInfo()
+        {
+            var list = new List<MessageInfo>();
+            if (File.Exists(MessageInfoFileName))
+            {
+                var xDocument = XDocument.Load(MessageInfoFileName);
+                var xElements = xDocument.Root.Elements("MessageInfo").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new MessageInfo
+                    {
+                        MessageId = elem.Attribute("MessageId").Value,
+                        ClientId = Convert.ToInt32(elem.Element("ClientId").Value),
+                        SenderName = elem.Element("SenderName").Value,
+                        DateDelivery = Convert.ToDateTime(elem.Element("DateDelivery").Value),
+                        Subject = elem.Element("Subject").Value,
+                        Body = elem.Element("Body").Value
+                    });
+                }
+            }
+            return list;
+        }
+
         private void SaveComponents() {
             if (Components != null) {
                 var xElement = new XElement("Components");
@@ -255,6 +282,27 @@ namespace CannedFactoryFileImplement
                     xElement.Add(new XElement("Implementer"),
                         new XAttribute("Id", implementer.Id),
                         new XElement("FIO", implementer.FIO));
+                }
+
+                var xDocument = new XDocument(xElement);
+                xDocument.Save(ImplementerFileName);
+            }
+        }
+
+        private void SaveMessagesInfo() {
+            if (MessagesInfo != null)
+            {
+                var xElement = new XElement("MessagesInfo");
+
+                foreach (var messageInfo in MessagesInfo)
+                {
+                    xElement.Add(new XElement("MessageInfo"),
+                        new XAttribute("MessageId", messageInfo.MessageId),
+                        new XElement("ClientId", messageInfo.ClientId),
+                        new XElement("SenderName", messageInfo.SenderName),
+                        new XElement("DateDelivery", messageInfo.DateDelivery),
+                        new XElement("Subject", messageInfo.Subject), 
+                        new XElement("Body", messageInfo.Body));
                 }
 
                 var xDocument = new XDocument(xElement);
