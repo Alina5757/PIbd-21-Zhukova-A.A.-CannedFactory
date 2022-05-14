@@ -75,6 +75,7 @@ namespace CannedFactoryBusinessLogic.BusinessLogics
                     Id = model.OrderId,
                     CannedId = element.CannedId,
                     ClientId = element.ClientId,
+                    ImplementerId = model.ImplementerId,
                     Count = element.Count,
                     Sum = element.Sum,
                     Status = OrderStatus.Выполняется,
