@@ -10,11 +10,16 @@ namespace CannedFactoryView
     {
         private readonly IOrderLogic _orderLogic;
         private readonly IReportLogic _reportLogic;
-        public FormMain(IOrderLogic orderLogic, IReportLogic reportLogic) 
+        private readonly IImplementerLogic _implementerLogic;
+        private readonly IWorkProcess _workLogic;
+
+        public FormMain(IOrderLogic orderLogic, IReportLogic reportLogic, IImplementerLogic implementerLogic, IWorkProcess workLogic) 
         {
             InitializeComponent();
             _orderLogic = orderLogic;
             _reportLogic = reportLogic;
+            _implementerLogic = implementerLogic;
+            _workLogic = workLogic;
         }
 
         private void FormMain_Load(object sender, EventArgs e) {
@@ -32,7 +37,8 @@ namespace CannedFactoryView
                     dataGridView1.Columns[0].Visible = false;
                     dataGridView1.Columns[1].Visible = false;
                     dataGridView1.Columns[2].Visible = false;
-                    dataGridView1.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView1.Columns[3].Visible = false;
+                   /*dataGridView1.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;*/
                 }
             }
             catch (Exception ex) {
@@ -138,6 +144,17 @@ namespace CannedFactoryView
         {
             var form = Program.Container.Resolve<FormClient>();
             form.ShowDialog();
+        }
+
+        private void ToolStripMenuItemImplementer_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormImplementers>();
+            form.ShowDialog();
+        }
+
+        private void ToolStripMenuItemWork_Click(object sender, EventArgs e)
+        {
+            _workLogic.DoWork(_implementerLogic, _orderLogic);
         }
     }
 }

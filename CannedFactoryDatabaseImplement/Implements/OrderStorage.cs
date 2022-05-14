@@ -29,11 +29,16 @@ namespace CannedFactoryDatabaseImplement.Implements
             }
             using var context = new CannedFactoryDatabase();
             return context.Orders
-            .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateCreate.Date == model.DateCreate.Date)
-            || (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date
-            >= model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date)
-            || (model.ClientId != 0 && rec.ClientId == model.ClientId))
-            .ToList()
+            .Include(rec => rec.Canned)
+            .Include(rec => rec.Client)
+            .Include(rec => rec.Implementer)
+            .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateCreate.Date == model.DateCreate.Date) ||
+            (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >=
+            model.DateFrom.Value.Date && rec.DateCreate.Date <=
+            model.DateTo.Value.Date) ||
+            (model.ClientId != 0 && rec.ClientId == model.ClientId) ||
+            (model.SearchStatus.HasValue && model.SearchStatus.Value == rec.Status) ||
+            (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && model.Status == rec.Status))
             .Select(CreateModel)
             .ToList();
         }
@@ -73,8 +78,7 @@ namespace CannedFactoryDatabaseImplement.Implements
         public void Delete(OrderBindingModel model)
         {
             using var context = new CannedFactoryDatabase();
-            Order element = context.Orders.FirstOrDefault(rec => rec.Id ==
-            model.Id);
+            Order element = context.Orders.FirstOrDefault(rec => rec.Id == model.Id);
             if (element != null)
             {
                 context.Orders.Remove(element);
@@ -90,6 +94,10 @@ namespace CannedFactoryDatabaseImplement.Implements
         {
             order.CannedId = model.CannedId;
             order.ClientId = model.ClientId;
+            if (model.ImplementerId != null)
+            {
+                order.ImplementerId = (int)model.ImplementerId;
+            }
             order.CannedName = context.Canneds.FirstOrDefault(rec => rec.Id == model.CannedId).CannedName;
             order.ClientName = context.Clients.FirstOrDefault(rec => rec.Id == model.ClientId).FIO;
             order.Count = model.Count;
@@ -104,13 +112,20 @@ namespace CannedFactoryDatabaseImplement.Implements
 
         private static OrderViewModel CreateModel(Order order)
         {
+            string FIOImp = "";
+            if (order.ImplementerId != null) {
+                using var context = new CannedFactoryDatabase();
+                FIOImp = context.Implementers.FirstOrDefault(rec => rec.Id == order.ImplementerId).FIO;
+            }
             return new OrderViewModel
             {
                 Id = order.Id,
-                CannedName= order.CannedName,
+                CannedName = order.CannedName,
                 CannedId = order.CannedId,
-                FIO = order.ClientName,
+                FIOClient = order.ClientName,
                 ClientId = order.ClientId,
+                ImplementerId = (int)(order.ImplementerId == null? 0 : order.ImplementerId),
+                FIOImplementer = FIOImp,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status.ToString(),

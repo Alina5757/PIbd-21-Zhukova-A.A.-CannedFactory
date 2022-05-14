@@ -125,11 +125,12 @@ namespace CannedFactoryListImplement.Implements
         {
             order.CannedId = model.CannedId;
             order.ClientId = model.ClientId;
+            order.ImplementerId = (int)model.ImplementerId;
             order.Count = model.Count;
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
             order.Sum = model.Sum;
-            order.status = model.Status;
+            order.Status = model.Status;
             return order;
         }
 
@@ -153,16 +154,31 @@ namespace CannedFactoryListImplement.Implements
                 }
             }
 
+            string nameImplementer = null;
+            if (order.ImplementerId != 0)
+            {
+                foreach (Implementer implementer in DataListSingleton.GetInstance().Implementers)
+                {
+                    if (implementer.Id == order.ImplementerId)
+                    {
+                        nameImplementer = implementer.FIO;
+                        break;
+                    }
+                }
+            }
+
             return new OrderViewModel
             {
                 Id = order.Id,
                 CannedId = order.CannedId,
                 ClientId = order.ClientId,
+                ImplementerId = order.ImplementerId,
                 CannedName = nameCanned,
-                FIO = nameClient,
+                FIOClient = nameClient,
+                FIOImplementer = nameImplementer,
                 Count = order.Count,
                 Sum = order.Sum,
-                Status = order.status.ToString(),
+                Status = order.Status.ToString(),
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement                
             };            

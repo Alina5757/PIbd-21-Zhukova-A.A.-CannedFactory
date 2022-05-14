@@ -33,10 +33,13 @@ namespace CannedFactoryFileImplement.Implements
             }
 
             return source.Orders
-            .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateCreate.Date == model.DateCreate.Date) 
-            || (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date
-            >= model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date) 
-            || (model.ClientId != 0 && rec.ClientId == model.ClientId))
+            .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateCreate.Date == model.DateCreate.Date) ||
+            (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >=
+            model.DateFrom.Value.Date && rec.DateCreate.Date <=
+            model.DateTo.Value.Date) ||
+            (model.ClientId != 0 && rec.ClientId == model.ClientId) ||
+            (model.SearchStatus.HasValue && model.SearchStatus.Value == rec.Status) ||
+            (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && model.Status == rec.Status))
             .Select(CreateModel)
             .ToList();
         }
@@ -94,7 +97,7 @@ namespace CannedFactoryFileImplement.Implements
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
             order.Sum = model.Sum;
-            order.status = model.Status;
+            order.Status = model.Status;
             return order;
         }
 
@@ -126,10 +129,10 @@ namespace CannedFactoryFileImplement.Implements
                 CannedId = order.CannedId,
                 ClientId = order.ClientId,
                 CannedName = nameCanned,
-                FIO = nameClient,
+                FIOClient = nameClient,
                 Count = order.Count,
                 Sum = order.Sum,
-                Status = order.status.ToString(),
+                Status = order.Status.ToString(),
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement
             };

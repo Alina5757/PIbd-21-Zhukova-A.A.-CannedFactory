@@ -56,8 +56,6 @@ namespace CannedFactoryView
         {
             DialogResult = DialogResult.Cancel;
             Close();
-        }
-
-        
+        }        
     }
 }
