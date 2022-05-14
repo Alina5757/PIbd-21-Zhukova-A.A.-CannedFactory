@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CannedFactoryContracts.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -9,15 +10,16 @@ namespace CannedFactoryContracts.ViewModels
 {
     public class ClientViewModel
     {
+        [Column(title: "Номер", width: 50)]
         public int? Id { get; set; }
 
-        [DisplayName("Логин")]
+        [Column(title: "Логин", width: 100)]
         public string Login { get; set; }
 
-        [DisplayName("ФИО")]
+        [Column(title: "ФИО", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string FIO { get; set; }
 
-        [DisplayName("Пароль")]
+        [Column(title: "Пароль", width: 100)]
         public string Password { get; set; }
     }
 }

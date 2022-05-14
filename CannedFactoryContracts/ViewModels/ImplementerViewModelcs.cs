@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CannedFactoryContracts.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -9,15 +10,16 @@ namespace CannedFactoryContracts.ViewModels
 {
     public class ImplementerViewModel
     {
+        [Column(title: "Номер", width: 75)]
         public int? Id { get; set; }
 
-        [DisplayName("ФИО")]
+        [Column(title: "ФИО", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string FIO { get; set; }
 
-        [DisplayName("Время работы")]
+        [Column(title: "Время работы", width: 75)]
         public int WorkingTime { get; set; }
 
-        [DisplayName("Время отдыха")]
+        [Column(title: "Время отдыха", width: 75)]
         public int PauseTime { get; set; }
     }
 }
