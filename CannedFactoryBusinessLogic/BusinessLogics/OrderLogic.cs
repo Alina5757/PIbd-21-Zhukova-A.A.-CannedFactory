@@ -36,9 +36,10 @@ namespace CannedFactoryBusinessLogic.BusinessLogics
             var element = _orderStorage.GetElement(new OrderBindingModel
             {
                 CannedId = model.CannedId,
+                ClientId = model.ClientId,
                 Count = model.Count,
                 Sum = model.Sum,
-                Status = CannedFactoryContracts.Enums.OrderStatus.Принят,
+                Status = OrderStatus.Принят,
                 DateCreate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second)
             });
             if (element != null)
@@ -47,9 +48,10 @@ namespace CannedFactoryBusinessLogic.BusinessLogics
             }
             _orderStorage.Insert(new OrderBindingModel {
                 CannedId = model.CannedId,
+                ClientId = model.ClientId,
                 Count = model.Count,
                 Sum = model.Sum,
-                Status = CannedFactoryContracts.Enums.OrderStatus.Принят,
+                Status = OrderStatus.Принят,
                 DateCreate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second)
             });
         }
@@ -72,6 +74,7 @@ namespace CannedFactoryBusinessLogic.BusinessLogics
                 {
                     Id = model.OrderId,
                     CannedId = element.CannedId,
+                    ClientId = element.ClientId,
                     Count = element.Count,
                     Sum = element.Sum,
                     Status = OrderStatus.Выполняется,
@@ -100,6 +103,7 @@ namespace CannedFactoryBusinessLogic.BusinessLogics
                 {
                     Id = model.OrderId,
                     CannedId = element.CannedId,
+                    ClientId = element.ClientId,
                     Count = element.Count,
                     Sum = element.Sum,
                     Status = OrderStatus.Готов,
@@ -128,6 +132,7 @@ namespace CannedFactoryBusinessLogic.BusinessLogics
                 {
                     Id = model.OrderId,
                     CannedId = element.CannedId,
+                    ClientId = element.ClientId,
                     Count = element.Count,
                     Sum = element.Sum,
                     Status = OrderStatus.Выдан,

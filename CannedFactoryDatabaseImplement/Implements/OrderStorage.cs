@@ -29,10 +29,13 @@ namespace CannedFactoryDatabaseImplement.Implements
             }
             using var context = new CannedFactoryDatabase();
             return context.Orders
-            .Where(rec => rec.DateCreate < model.DateTo && rec.DateCreate > model.DateFrom)
+            .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateCreate.Date == model.DateCreate.Date)
+            || (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date
+            >= model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date)
+            || (model.ClientId != 0 && rec.ClientId == model.ClientId))
             .ToList()
             .Select(CreateModel)
-            .ToList();            
+            .ToList();
         }
 
         public OrderViewModel GetElement(OrderBindingModel model)
@@ -86,7 +89,9 @@ namespace CannedFactoryDatabaseImplement.Implements
         private static Order CreateModel(OrderBindingModel model, Order order, CannedFactoryDatabase context)
         {
             order.CannedId = model.CannedId;
-            order.CannedName = context.Canneds.FirstOrDefault(rec => rec.Id == model.CannedId).CannedName; 
+            order.ClientId = model.ClientId;
+            order.CannedName = context.Canneds.FirstOrDefault(rec => rec.Id == model.CannedId).CannedName;
+            order.ClientName = context.Clients.FirstOrDefault(rec => rec.Id == model.ClientId).FIO;
             order.Count = model.Count;
             order.DateCreate = model.DateCreate;
             if (model.DateImplement.HasValue) {
@@ -104,6 +109,8 @@ namespace CannedFactoryDatabaseImplement.Implements
                 Id = order.Id,
                 CannedName= order.CannedName,
                 CannedId = order.CannedId,
+                FIO = order.ClientName,
+                ClientId = order.ClientId,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status.ToString(),

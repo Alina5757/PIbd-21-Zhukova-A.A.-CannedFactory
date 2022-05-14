@@ -34,13 +34,28 @@ namespace CannedFactoryListImplement.Implements
             }
 
             var result = new List<OrderViewModel>();
-            foreach (var order in source.Orders)
+
+            if(model.DateFrom.HasValue && model.DateTo.HasValue)
             {
-                if (order.DateCreate > model.DateFrom && order.DateCreate < model.DateTo)
+                foreach (var order in source.Orders)
                 {
-                    result.Add(CreateModel(order));
+                    if (order.DateCreate > model.DateFrom && order.DateCreate < model.DateTo)
+                    {
+                        result.Add(CreateModel(order));
+                    }
                 }
             }
+
+            else if (model.ClientId != 0) {
+                foreach (var order in source.Orders)
+                {
+                    if (order.ClientId == model.ClientId)
+                    {
+                        result.Add(CreateModel(order));
+                    }
+                }
+            }
+            
             return result;
         }
 
@@ -109,6 +124,7 @@ namespace CannedFactoryListImplement.Implements
         private static Order CreateModel(OrderBindingModel model, Order order)
         {
             order.CannedId = model.CannedId;
+            order.ClientId = model.ClientId;
             order.Count = model.Count;
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
@@ -126,11 +142,24 @@ namespace CannedFactoryListImplement.Implements
                     break;
                 }
             }
+
+            string nameClient = null;
+            foreach (Client client in DataListSingleton.GetInstance().Clients)
+            {
+                if (client.Id == order.ClientId)
+                {
+                    nameClient = client.FIO;
+                    break;
+                }
+            }
+
             return new OrderViewModel
             {
                 Id = order.Id,
                 CannedId = order.CannedId,
+                ClientId = order.ClientId,
                 CannedName = nameCanned,
+                FIO = nameClient,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.status.ToString(),

@@ -9,7 +9,7 @@ namespace CannedFactoryDatabaseImplement
         {
             if (optionsBuilder.IsConfigured == false)
             {
-                optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-H7FNSK3\SQLEXPRESS;Initial Catalog=CannedFactoryDatabase;Integrated Security=True;MultipleActiveResultSets=True;");
+                optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-H7FNSK3\SQLEXPRESS;Initial Catalog=CannedFactoryDatabase;Integrated Security=True;MultipleActiveResultSets=True;"); // Aln-Pc
             }
             base.OnConfiguring(optionsBuilder);
         }
@@ -17,5 +17,6 @@ namespace CannedFactoryDatabaseImplement
         public virtual DbSet<Canned> Canneds { set; get; }
         public virtual DbSet<CannedComponent> CannedComponents { set; get; }
         public virtual DbSet<Order> Orders { set; get; }
+        public virtual DbSet<Client> Clients { set; get; }
     }
 }

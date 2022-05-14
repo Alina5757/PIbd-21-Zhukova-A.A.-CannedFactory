@@ -8,9 +8,13 @@ namespace CannedFactoryDatabaseImplement.Models
     {
         public int Id { get; set; }
         public int CannedId { get; set; }
+        public int ClientId { get; set; }
 
         [Required]
         public string CannedName { get; set; }
+
+        [Required]
+        public string ClientName { get; set; }
 
         [Required]
         public int Count { get; set; }
@@ -27,5 +31,6 @@ namespace CannedFactoryDatabaseImplement.Models
         public DateTime DateImplement { get; set; }
 
         public virtual Canned Canned { get; set; }
+        public virtual Client Client { get; set; }
     }
 }

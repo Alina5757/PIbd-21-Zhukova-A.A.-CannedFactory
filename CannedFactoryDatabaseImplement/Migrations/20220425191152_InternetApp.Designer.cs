@@ -4,14 +4,16 @@ using CannedFactoryDatabaseImplement;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CannedFactoryDatabaseImplement.Migrations
 {
     [DbContext(typeof(CannedFactoryDatabase))]
-    partial class CannedFactoryDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20220425191152_InternetApp")]
+    partial class InternetApp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

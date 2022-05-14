@@ -33,9 +33,12 @@ namespace CannedFactoryFileImplement.Implements
             }
 
             return source.Orders
-            .Where(rec => rec.DateCreate > model.DateFrom && rec.DateCreate < model.DateTo)
+            .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateCreate.Date == model.DateCreate.Date) 
+            || (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date
+            >= model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date) 
+            || (model.ClientId != 0 && rec.ClientId == model.ClientId))
             .Select(CreateModel)
-            .ToList();            
+            .ToList();
         }
 
         public OrderViewModel GetElement(OrderBindingModel model)
@@ -86,6 +89,7 @@ namespace CannedFactoryFileImplement.Implements
         private static Order CreateModel(OrderBindingModel model, Order order)
         {
             order.CannedId = model.CannedId;
+            order.ClientId = model.ClientId;
             order.Count = model.Count;
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
@@ -106,11 +110,23 @@ namespace CannedFactoryFileImplement.Implements
                 }
             }
 
+            string nameClient = null;
+            foreach (Client client in FileDataListSingleton.GetInstance().Clients)
+            {
+                if (client.Id == order.ClientId)
+                {
+                    nameClient = client.FIO;
+                    break;
+                }
+            }
+
             return new OrderViewModel
             {
                 Id = order.Id,
                 CannedId = order.CannedId,
+                ClientId = order.ClientId,
                 CannedName = nameCanned,
+                FIO = nameClient,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.status.ToString(),
