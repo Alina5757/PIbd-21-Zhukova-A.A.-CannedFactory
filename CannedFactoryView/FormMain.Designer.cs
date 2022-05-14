@@ -39,6 +39,10 @@ namespace CannedFactoryView
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemComponents = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemCanneds = new System.Windows.Forms.ToolStripMenuItem();
+            this.отчетыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ComponentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ComponentCannedsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -107,7 +111,8 @@ namespace CannedFactoryView
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
+            this.toolStripMenuItem1,
+            this.отчетыToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1045, 24);
@@ -136,6 +141,37 @@ namespace CannedFactoryView
             this.ToolStripMenuItemCanneds.Size = new System.Drawing.Size(192, 22);
             this.ToolStripMenuItemCanneds.Text = "Список изделий";
             this.ToolStripMenuItemCanneds.Click += new System.EventHandler(this.ToolStripMenuItemCanneds_Click);
+            // 
+            // отчетыToolStripMenuItem
+            // 
+            this.отчетыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ComponentsToolStripMenuItem,
+            this.ComponentCannedsToolStripMenuItem,
+            this.OrdersToolStripMenuItem});
+            this.отчетыToolStripMenuItem.Name = "отчетыToolStripMenuItem";
+            this.отчетыToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.отчетыToolStripMenuItem.Text = "Отчеты";
+            // 
+            // ComponentsToolStripMenuItem
+            // 
+            this.ComponentsToolStripMenuItem.Name = "ComponentsToolStripMenuItem";
+            this.ComponentsToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
+            this.ComponentsToolStripMenuItem.Text = "Список консервов";
+            this.ComponentsToolStripMenuItem.Click += new System.EventHandler(this.ComponentsToolStripMenuItem_Click);
+            // 
+            // ComponentCannedsToolStripMenuItem
+            // 
+            this.ComponentCannedsToolStripMenuItem.Name = "ComponentCannedsToolStripMenuItem";
+            this.ComponentCannedsToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.ComponentCannedsToolStripMenuItem.Text = "Компоненты в изделиях";
+            this.ComponentCannedsToolStripMenuItem.Click += new System.EventHandler(this.ComponentCannedsToolStripMenuItem_Click);
+            // 
+            // OrdersToolStripMenuItem
+            // 
+            this.OrdersToolStripMenuItem.Name = "OrdersToolStripMenuItem";
+            this.OrdersToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
+            this.OrdersToolStripMenuItem.Text = "Список заказов";
+            this.OrdersToolStripMenuItem.Click += new System.EventHandler(this.OrdersToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -173,5 +209,9 @@ namespace CannedFactoryView
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemComponents;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemCanneds;
+        private System.Windows.Forms.ToolStripMenuItem отчетыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ComponentsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ComponentCannedsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem OrdersToolStripMenuItem;
     }
 }

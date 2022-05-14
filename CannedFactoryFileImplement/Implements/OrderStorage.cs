@@ -33,7 +33,7 @@ namespace CannedFactoryFileImplement.Implements
             }
 
             return source.Orders
-            .Where(rec => rec.Id.Equals(model.Id))
+            .Where(rec => rec.DateCreate > model.DateFrom && rec.DateCreate < model.DateTo)
             .Select(CreateModel)
             .ToList();            
         }
