@@ -10,7 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CannedFactoryClientApp.Controllers   //////////////////////////////////////////////////////////////////////////////////////////////////дописать
+namespace CannedFactoryClientApp.Controllers
 {
     public class HomeController : Controller
     {
