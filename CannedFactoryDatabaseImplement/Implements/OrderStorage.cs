@@ -29,10 +29,10 @@ namespace CannedFactoryDatabaseImplement.Implements
             }
             using var context = new CannedFactoryDatabase();
             return context.Orders
-            .Where(rec => rec.Id.Equals(model.Id))
+            .Where(rec => rec.DateCreate < model.DateTo && rec.DateCreate > model.DateFrom)
             .ToList()
             .Select(CreateModel)
-            .ToList();
+            .ToList();            
         }
 
         public OrderViewModel GetElement(OrderBindingModel model)
