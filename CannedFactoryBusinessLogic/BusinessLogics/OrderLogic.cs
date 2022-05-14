@@ -1,4 +1,5 @@
-﻿using CannedFactoryContracts.BindingModels;
+﻿using CannedFactoryBusinessLogic.MailWorker;
+using CannedFactoryContracts.BindingModels;
 using CannedFactoryContracts.BusinessLogicsContracts;
 using CannedFactoryContracts.Enums;
 using CannedFactoryContracts.StoragesContracts;
@@ -12,10 +13,14 @@ namespace CannedFactoryBusinessLogic.BusinessLogics
     public class OrderLogic : IOrderLogic
     {
         private readonly IOrderStorage _orderStorage;
+        private readonly IClientStorage _clientStorage;
+        private readonly AbstractMailWorker _mailWorker;
 
-        public OrderLogic(IOrderStorage orderStorage)
+        public OrderLogic(IOrderStorage orderStorage, AbstractMailWorker mailWorker, IClientStorage clientStorage)
         {
             _orderStorage = orderStorage;
+            _clientStorage = clientStorage;
+            _mailWorker = mailWorker;
         }
 
         public List<OrderViewModel> Read(OrderBindingModel model)
@@ -54,6 +59,16 @@ namespace CannedFactoryBusinessLogic.BusinessLogics
                 Status = OrderStatus.Принят,
                 DateCreate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second)
             });
+
+            _mailWorker.MailSendAsync(new MailSendInfoBindingModel
+            {
+                MailAddress = _clientStorage.GetElement(new ClientBindingModel
+                {
+                    Id = model.ClientId
+                })?.Login,
+                Subject = "Создан заказ",
+                Text = $"Заказ от {DateTime.Now} количеством {model.Count} на сумму {model.Sum} создан"
+            });
         }
 
         public void TakeOrderInWork(ChangeStatusBindingModel model)
@@ -82,6 +97,16 @@ namespace CannedFactoryBusinessLogic.BusinessLogics
                     DateCreate = element.DateCreate
                 });
             }
+
+            _mailWorker.MailSendAsync(new MailSendInfoBindingModel
+            {
+                MailAddress = _clientStorage.GetElement(new ClientBindingModel
+                {
+                    Id = element.ClientId
+                })?.Login,
+                Subject = $"Заказ №{element.Id} передан в работу",
+                Text = $"Заказ №{element.Id} от {DateTime.Now} количеством {element.Count} на сумму {element.Sum} передан в работу"
+            });
         }
 
         public void FinishOrder(ChangeStatusBindingModel model)
@@ -111,6 +136,16 @@ namespace CannedFactoryBusinessLogic.BusinessLogics
                     DateCreate = element.DateCreate
                 });
             }
+
+            _mailWorker.MailSendAsync(new MailSendInfoBindingModel
+            {
+                MailAddress = _clientStorage.GetElement(new ClientBindingModel
+                {
+                    Id = element.ClientId
+                })?.Login,
+                Subject = $"Заказ №{element.Id} готов",
+                Text = $"Заказ №{element.Id} от {DateTime.Now} количеством {element.Count} на сумму {element.Sum} готов"
+            });
         }
 
         public void DeliveryOrder(ChangeStatusBindingModel model)
@@ -141,6 +176,16 @@ namespace CannedFactoryBusinessLogic.BusinessLogics
                     DateImplement = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second)
                 });
             }
+
+            _mailWorker.MailSendAsync(new MailSendInfoBindingModel
+            {
+                MailAddress = _clientStorage.GetElement(new ClientBindingModel
+                {
+                    Id = element.ClientId
+                })?.Login,
+                Subject = $"Заказ №{element.Id} выдан",
+                Text = $"Заказ №{element.Id} от {DateTime.Now} количеством {element.Count} на сумму {element.Sum} выдан"
+            });
         }
     }
 }

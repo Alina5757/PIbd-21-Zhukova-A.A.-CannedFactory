@@ -19,6 +19,8 @@ namespace CannedFactoryListImplement
 
         public List<Implementer> Implementers { get; set; }
 
+        public List<MessageInfo> MessagesInfo { get; set; }
+
         private DataListSingleton()
         {
             Components = new List<Component>();
@@ -26,6 +28,7 @@ namespace CannedFactoryListImplement
             Canneds = new List<Canned>();
             Clients = new List<Client>();
             Implementers = new List<Implementer>();
+            MessagesInfo = new List<MessageInfo>();
         }
 
         public static DataListSingleton GetInstance()

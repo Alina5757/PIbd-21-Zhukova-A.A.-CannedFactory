@@ -44,6 +44,7 @@ namespace CannedFactoryView
             this.ComponentCannedsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemWork = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemMessage = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -107,7 +108,8 @@ namespace CannedFactoryView
             this.ToolStripMenuItemComponents,
             this.ToolStripMenuItemCanneds,
             this.ToolStripMenuItemClients,
-            this.ToolStripMenuItemImplementer});
+            this.ToolStripMenuItemImplementer,
+            this.ToolStripMenuItemMessage});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(94, 20);
             this.toolStripMenuItem1.Text = "Справочники";
@@ -178,6 +180,13 @@ namespace CannedFactoryView
             this.ToolStripMenuItemWork.Text = "Запуск работ";
             this.ToolStripMenuItemWork.Click += new System.EventHandler(this.ToolStripMenuItemWork_Click);
             // 
+            // ToolStripMenuItemMessage
+            // 
+            this.ToolStripMenuItemMessage.Name = "ToolStripMenuItemMessage";
+            this.ToolStripMenuItemMessage.Size = new System.Drawing.Size(197, 22);
+            this.ToolStripMenuItemMessage.Text = "Список писем";
+            this.ToolStripMenuItemMessage.Click += new System.EventHandler(this.ToolStripMenuItemMessage_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -217,5 +226,6 @@ namespace CannedFactoryView
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemClients;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemImplementer;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemWork;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemMessage;
     }
 }
