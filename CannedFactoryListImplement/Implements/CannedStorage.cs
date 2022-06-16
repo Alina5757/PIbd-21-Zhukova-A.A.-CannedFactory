@@ -147,5 +147,6 @@ namespace CannedFactoryListImplement.Implements
                 CannedComponents = cannedComponents
             };
         }
+
     }
 }
